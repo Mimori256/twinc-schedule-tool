@@ -1,0 +1,15 @@
+export type Module =
+  | "SA"
+  | "SB"
+  | "SC"
+  | "FA"
+  | "FB"
+  | "FC"
+  | "SAE"
+  | "SBE"
+  | "SCE"
+  | "FAE"
+  | "FBE"
+  | "FCE"
+  | "SABCE"
+  | "FABCE";
