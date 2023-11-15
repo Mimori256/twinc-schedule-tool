@@ -21,7 +21,7 @@
 </script>
 
 <div>
-  <p>それぞれの開始日、終了日を入力</p>
+  <p>それぞれの最初の開始日、終了日を入力</p>
   {#each dateSelector as module}
     <DateSelector nendo={nendo} module={module} on:dateChange={handleDateChange} />
   {/each}
@@ -32,7 +32,7 @@
     background-color: #114ea0;
     border-radius: 10px;
     width: 40%;
-    margin:  auto;
+    margin:  40px auto;
     padding: 1rem;
   }
 </style>
