@@ -3,6 +3,7 @@
   import Footer from './components/Footer.svelte';
   import DateSelectSection from './components/DateSelectSection.svelte';
   import HolidaySection from './components/HolidaySection.svelte';
+  import RescheduleSection from './components/RescheduleSection.svelte';
   import {dateSelectorValues, holidayValues} from "./stores/store"
 
   const currentYear = new Date().getFullYear();
@@ -30,6 +31,7 @@
   <p>{nendo}年度用のスケジュールを作成します</p>
   <DateSelectSection nendo={nendo} />
   <HolidaySection />
+  <RescheduleSection />
   <hr />
   <Footer />
 </div>
