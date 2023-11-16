@@ -1,19 +1,19 @@
 import type { Module } from "../types/Module";
 const dateSelections: Module[] = [
-  "SA",
-  "SB",
-  "SC",
-  "FA",
-  "FB",
-  "FC",
+  "beginSpringA",
+  "beginSpringB",
+  "beginSpringC",
+  "beginFallA",
+  "beginFallB",
+  "beginFallC",
   "SAE",
   "SBE",
   "SCE",
   "FAE",
   "FBE",
   "FCE",
-  "SABCE",
-  "FABCE",
+  "springABCEndDate",
+  "fallABCEndDate",
 ];
 
 export default dateSelections;

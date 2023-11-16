@@ -4,7 +4,8 @@
   import DateSelectSection from './components/DateSelectSection.svelte';
   import HolidaySection from './components/HolidaySection.svelte';
   import RescheduleSection from './components/RescheduleSection.svelte';
-  import {dateSelectorValues, holidayValues} from "./stores/store"
+  import {dateSelectorValues, holidayValues, rescheduleSelectorValues} from "./stores/store"
+  import createJSON from './lib/createJSON';
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
@@ -16,11 +17,19 @@
     nendo = currentYear;
   }
 
+  const handleButton = () => {
+    createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues)
+  }
+
   dateSelectorValues.subscribe((value: any) => {
     console.log(value)
   })
 
   holidayValues.subscribe((value: any) => {
+    console.log(value)
+  })
+
+  rescheduleSelectorValues.subscribe((value: any) => {
     console.log(value)
   })
 
@@ -32,6 +41,7 @@
   <DateSelectSection nendo={nendo} />
   <HolidaySection />
   <RescheduleSection />
+  <button on:click={handleButton}>作成</button>
   <hr />
   <Footer />
 </div>
@@ -39,5 +49,9 @@
 <style>
   hr {
     color: #fff;
+  }
+
+  button {
+    margin-bottom: 10px;
   }
 </style>

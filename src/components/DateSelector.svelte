@@ -12,27 +12,27 @@
   const dispatch = createEventDispatcher()
 
   switch(module) {
-    case "SA":
+    case "beginSpringA":
         selectedDate = `${nendo}-04-10`
         dateMessage = "春A開始日"
         break;
-    case "SB":
+    case "beginSpringB":
         selectedDate = `${nendo}-05-20`
         dateMessage = "春B開始日"
         break;
-    case "SC":
+    case "beginSpringC":
         selectedDate = `${nendo}-07-01`
         dateMessage = "春C開始日"
         break;
-    case "FA":
+    case "beginFallA":
         selectedDate = `${nendo}-10-01`
         dateMessage = "秋A開始日"
         break;
-    case "FB":
+    case "beginFallB":
         selectedDate = `${nendo}-11-10`
         dateMessage = "秋B開始日"
         break;
-    case "FC":
+    case "beginFallC":
         selectedDate = `${nendo + 1}-01-05`
         dateMessage = "秋C開始日"
         break;
@@ -60,11 +60,11 @@
         selectedDate = `${nendo + 1}-02-14`
         dateMessage = "秋C終了日"
         break;
-    case "SABCE":
+    case "springABCEndDate":
         selectedDate = `${nendo}-08-14`
         dateMessage = "春ABC終了日"
         break;
-    case "FABCE":
+    case "fallABCEndDate":
         selectedDate = `${nendo + 1}-02-14`
         dateMessage = "秋ABC終了日"
         break;

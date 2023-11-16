@@ -1,15 +1,15 @@
 export type Module =
-  | "SA"
-  | "SB"
-  | "SC"
-  | "FA"
-  | "FB"
-  | "FC"
+  | "beginSpringA"
+  | "beginSpringB"
+  | "beginSpringC"
+  | "beginFallA"
+  | "beginFallB"
+  | "beginFallC"
   | "SAE"
   | "SBE"
   | "SCE"
   | "FAE"
   | "FBE"
   | "FCE"
-  | "SABCE"
-  | "FABCE";
+  | "springABCEndDate"
+  | "fallABCEndDate";
