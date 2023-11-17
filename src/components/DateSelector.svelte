@@ -1,14 +1,14 @@
 <script lang="ts">
   import type { Module } from "../types/Module";
   import {createEventDispatcher} from "svelte";
+  import {dateSelectorValues} from "../stores/store"
 
   export let nendo: number
   export let module: Module
 
   let dateSelections: any
-  let selectedDate: string 
   let dateMessage: string
-
+  let selectedDate: string 
   const dispatch = createEventDispatcher()
 
   switch(module) {
@@ -70,8 +70,15 @@
         break;
   }
 
-  const handleDateChange = () => {
-    dispatch("dateChange", {module: module, date: new Date(selectedDate), dateSelections: dateSelections})
+  dateSelectorValues.update((value: any) => { value[module] = new Date(selectedDate)
+    return value
+  })
+
+  const handleDateChange = (event: Event) => {
+     const newDate = (event.target as HTMLInputElement).value;
+    dateSelectorValues.update((value: any) => { value[module] = new Date(newDate);
+      return value
+    })
   }
 </script>
 

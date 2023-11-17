@@ -18,15 +18,14 @@
   }
 
   const handleButton = () => {
-    createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues)
+    console.log($dateSelectorValues)
+    createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, nendo)
   }
 
   dateSelectorValues.subscribe((value: any) => {
-    console.log(value)
   })
 
   holidayValues.subscribe((value: any) => {
-    console.log(value)
   })
 
   rescheduleSelectorValues.subscribe((value: any) => {
