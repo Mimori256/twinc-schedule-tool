@@ -18,9 +18,20 @@
     nendo = currentYear;
   }
 
+  const downloadObjectAsJson = (exportObj: any) => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "schedule.json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
   const handleButton = () => {
     console.log($dateSelectorValues)
-    createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
+    const res = createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
+    downloadObjectAsJson(res);
   }
 
   dateSelectorValues.subscribe((value: any) => {

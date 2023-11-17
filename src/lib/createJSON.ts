@@ -21,7 +21,7 @@ const getDaysOfWeek = (date: Date) => {
   return daysOfWeek[day];
 };
 
-const getNextWeekDays = (date: Date): { [key: string]: string } => {
+const getNextWeekDays = (date: Date): any => {
   let res: { [key: string]: string } = {};
   res[getDaysOfWeek(date)] = formatDateYYYYMMDD(date);
 
@@ -155,8 +155,6 @@ const createJSON = (
 ) => {
   const dateSelectorValues = SelectorValues;
 
-  console.log(deadlineValues);
-
   let res: any = {};
   holidayValues = holidayValues.map((v) => {
     return createHolidayData(v, nendo);
@@ -181,6 +179,31 @@ const createJSON = (
     );
   }
 
+  // Parse start/end dates
+  for (let key in dateSelectorValues) {
+    if (key.startsWith("begin")) {
+      res[key] = getNextWeekDays(dateSelectorValues[key]);
+    } else if (key.length === 3) {
+      continue;
+    } else {
+      res[key] = formatDate(dateSelectorValues[key]);
+    }
+  }
+
+  const springEndDate = {
+    A: formatDate(dateSelectorValues["SAE"]),
+    B: formatDate(dateSelectorValues["SBE"]),
+    C: formatDate(dateSelectorValues["SCE"]),
+  };
+  const fallEndDate = {
+    A: formatDate(dateSelectorValues["FAE"]),
+    B: formatDate(dateSelectorValues["FBE"]),
+    C: formatDate(dateSelectorValues["FCE"]),
+  };
+
+  res["springEndDate"] = springEndDate;
+  res["fallEndDate"] = fallEndDate;
+
   // Parse rescheduled classes
   let rescheduledDateList = [];
   let rescheduledClassList = [];
@@ -201,7 +224,10 @@ const createJSON = (
 
   res["deadlinesDate"] = deadlineValues;
 
+  res["timeStamp"] = `${nendo}0405T000000`;
+
   console.log(res);
+  return res;
 };
 
 export default createJSON;
