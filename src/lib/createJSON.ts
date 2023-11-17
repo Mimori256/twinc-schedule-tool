@@ -137,17 +137,33 @@ const createHolidayData = (datestring: string, nendo: number) => {
   }
 };
 
+const createDeadlinesData = (datestring: string, nendo: number) => {
+  const plusYearList = ["01", "02", "03"];
+  if (plusYearList.includes(datestring.slice(0, 2))) {
+    return `${nendo + 1}${datestring.slice(0, 2)}${datestring.slice(2, 4)}`;
+  } else {
+    return `${nendo}${datestring.slice(0, 2)}${datestring.slice(2, 4)}`;
+  }
+};
+
 const createJSON = (
   SelectorValues: any,
   holidayValues: string[],
   rescheduleSelectorValues: any,
+  deadlineValues: string[],
   nendo: number
 ) => {
   const dateSelectorValues = SelectorValues;
 
+  console.log(deadlineValues);
+
   let res: any = {};
   holidayValues = holidayValues.map((v) => {
     return createHolidayData(v, nendo);
+  });
+
+  deadlineValues = deadlineValues.map((v) => {
+    return createDeadlinesData(v, nendo);
   });
 
   // Parse holidays
@@ -182,6 +198,8 @@ const createJSON = (
 
   res["rescheduledDateList"] = rescheduledDateList;
   res["rescheduledClassList"] = rescheduledClassList;
+
+  res["deadlinesDate"] = deadlineValues;
 
   console.log(res);
 };

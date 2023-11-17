@@ -7,3 +7,4 @@ export const holidayValues: Writable<string[]> = writable([]);
 export const rescheduleSelectorValues: Writable<RescheduleData[]> = writable(
   []
 );
+export const deadlineValues: Writable<string[]> = writable([]);
