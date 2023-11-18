@@ -32,17 +32,8 @@
     console.log($dateSelectorValues)
     const res = createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
     downloadObjectAsJson(res);
+    window.location.reload(true);
   }
-
-  dateSelectorValues.subscribe((value: any) => {
-  })
-
-  holidayValues.subscribe((value: any) => {
-  })
-
-  rescheduleSelectorValues.subscribe((value: any) => {
-    console.log(value)
-  })
 
 </script>
 
