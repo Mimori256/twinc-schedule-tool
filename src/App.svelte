@@ -32,7 +32,7 @@
     console.log($dateSelectorValues)
     const res = createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
     downloadObjectAsJson(res);
-    window.location.reload(true);
+    window.location.reload();
   }
 
 </script>

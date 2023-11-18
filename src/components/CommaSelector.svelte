@@ -1,5 +1,5 @@
 <script lang="ts">
-  import checkValidHolidays from "../utils/checkValidHolidays";
+  import checkValidHolidays from "../utils/checkValidDays";
   import {createEventDispatcher} from "svelte";
 
   let input: string = "";

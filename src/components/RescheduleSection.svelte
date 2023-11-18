@@ -11,7 +11,7 @@
   }
 
   const addSelector = () => {
-    selectors = [...selectors, {}]; // Add a new selector
+    selectors = [...selectors, {}];
     rescheduleSelectorValues.update((value: any) => {
       value.push(nullData)
       return value;

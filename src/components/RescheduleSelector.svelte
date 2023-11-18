@@ -1,9 +1,14 @@
 <script lang="ts">
   import {createEventDispatcher} from "svelte";
+  import {rescheduleSelectorValues} from "../stores/store";
 
-  let date: Date;
+  let date: Date | null;
   let replaceDay: string;
   let isValid: boolean = false;
+
+  if ($rescheduleSelectorValues.length > 1) {
+    date = $rescheduleSelectorValues[$rescheduleSelectorValues.length -2].date;
+  }
 
   const dispatch = createEventDispatcher();
 
