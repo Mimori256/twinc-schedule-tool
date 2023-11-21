@@ -19,7 +19,6 @@ const checkValidDays = (text: string) => {
   let res = true;
   splited_text.forEach((value) => {
     value = value.trim();
-    console.log(value);
     if (!pattern.test(value) || !ifValidDate(value)) {
       res = false;
     }

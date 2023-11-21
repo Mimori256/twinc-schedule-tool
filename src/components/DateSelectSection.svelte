@@ -15,7 +15,6 @@
   const handleDateChange = (props: CustomEvent<DateSelectorProps>) => {
     let { module, date} = props.detail;
     dateSelections[module] = date;
-    console.log(dateSelections)
     dateSelectorValues.update((value: any) => value = dateSelections)
   }
 

@@ -226,7 +226,6 @@ const createJSON = (
 
   res["timeStamp"] = `${nendo}0405T000000`;
 
-  console.log(res);
   return res;
 };
 

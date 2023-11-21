@@ -34,10 +34,6 @@
     })
   }
 
-  rescheduleSelectorValues.subscribe((value: any) => {
-    console.log(value)
-  })
-  
   onMount (() => {
     rescheduleSelectorValues.update((value: any) => value = [nullData])
   })

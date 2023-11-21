@@ -1,6 +1,9 @@
 <script lang="ts">
   import CommaSelector from "./CommaSelector.svelte";
+  import DeadlinesDetailSection from "./DeadlinesDetailSection.svelte";
   import {deadlineValues} from "../stores/store";
+
+  export let nendo: number;
 
   interface InputUpdateProps {
     data: string[];
@@ -17,6 +20,7 @@
   <p>春Aの事前登録締切日、春Aの履修登録締切日、春Bの事前登録締切日...とカンマ区切りで順に入力</p>
   <p>月と日を合わせて、計4文字の半角数字で入力してください (例: 1月13日 → 0113,...)</p>
   <CommaSelector on:inputUpdate={handleInputUpdate}/>
+  <DeadlinesDetailSection nendo={nendo} />
 </div>
 
 <style>

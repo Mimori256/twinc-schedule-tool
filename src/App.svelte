@@ -29,7 +29,6 @@
   }
 
   const handleButton = () => {
-    console.log($dateSelectorValues)
     const res = createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
     downloadObjectAsJson(res);
     window.location.reload();
@@ -43,7 +42,7 @@
   <DateSelectSection nendo={nendo} />
   <HolidaySection />
   <RescheduleSection />
-  <DeadlineSection />
+  <DeadlineSection nendo={nendo}/>
   <button on:click={handleButton}>作成</button>
   <hr />
   <Footer />
