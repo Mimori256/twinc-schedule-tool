@@ -6,6 +6,7 @@
   import RescheduleSection from './components/RescheduleSection.svelte';
   import DeadlineSection from './components/DeadlineSection.svelte';
   import {dateSelectorValues, holidayValues, rescheduleSelectorValues, deadlineValues} from "./stores/store"
+  import validiateData from './utils/validiateData';
   import createJSON from './lib/createJSON';
 
   const currentYear = new Date().getFullYear();
@@ -29,9 +30,14 @@
   }
 
   const handleButton = () => {
-    const res = createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
-    downloadObjectAsJson(res);
-    window.location.reload();
+    const {isValid, errmsg} = validiateData($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues)
+    if (!isValid) {
+      alert(errmsg)
+    } else {
+      const res = createJSON($dateSelectorValues, $holidayValues, $rescheduleSelectorValues, $deadlineValues, nendo)
+      downloadObjectAsJson(res);
+      window.location.reload();
+    }
   }
 
 </script>
