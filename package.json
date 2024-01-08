@@ -11,6 +11,7 @@
     "deploy": "vite build && npx gh-pages -d dist"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.4.1",
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
     "@tsconfig/svelte": "^5.0.0",
     "svelte": "^4.0.5",

@@ -17,12 +17,13 @@ const checkValidDays = (text: string) => {
   const splited_text = text.split(",");
   const pattern = /^[0-9]{4}$/;
   let res = true;
-  splited_text.forEach((value) => {
-    value = value.trim();
-    if (!pattern.test(value) || !ifValidDate(value)) {
+  for (const value of splited_text) {
+    const trimmedValue = value.trim();
+    if (!pattern.test(trimmedValue) || !ifValidDate(trimmedValue)) {
       res = false;
+      break;
     }
-  });
+  }
 
   return res;
 };

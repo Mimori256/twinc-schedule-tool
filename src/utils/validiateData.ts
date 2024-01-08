@@ -10,9 +10,11 @@ const validiateRescheduleData = (data: RescheduleData) => {
   const daysOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
   if (data.date === null || data.replaceDay === null) {
     return false;
-  } else if (!daysOfWeek.includes(data.replaceDay)) {
+  }
+  if (!daysOfWeek.includes(data.replaceDay)) {
     return false;
-  } else if (daysOfWeek[new Date(data.date).getDay()] === data.replaceDay) {
+  }
+  if (daysOfWeek[new Date(data.date).getDay()] === data.replaceDay) {
     return false;
   }
   return true;
@@ -22,9 +24,9 @@ const validiateData = (
   dateSelectorValues: any,
   holidayValues: string[],
   rescheduleSelectorValues: RescheduleData[],
-  deadlineValues: string[]
+  deadlineValues: string[],
 ): ValidiateResult => {
-  let errmsg = [];
+  const errmsg = [];
 
   // Check holiday values
   if (dateSelectorValues.length !== 14) {
@@ -43,17 +45,16 @@ const validiateData = (
     errmsg.push("締め切り日の入力に問題があります");
   }
 
-  rescheduleSelectorValues.forEach((value) => {
+  for (const value of rescheduleSelectorValues) {
     if (!validiateRescheduleData(value)) {
       errmsg.push("振替日の入力に問題があります");
     }
-  });
+  }
 
   if (errmsg.length === 0) {
     return { isValid: true, errmsg: "" };
-  } else {
-    return { isValid: false, errmsg: errmsg.join("\n") };
   }
+  return { isValid: false, errmsg: errmsg.join("\n") };
 };
 
 export default validiateData;

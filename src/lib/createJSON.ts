@@ -7,10 +7,10 @@ const formatDateYYYYMMDD = (date: Date) => {
 
   // add "0" if month or day is less than 10
   if (parseInt(month) < 10) {
-    month = "0" + month;
+    month = `0${month}`;
   }
   if (parseInt(day) < 10) {
-    day = "0" + day;
+    day = `0${day}`;
   }
 
   return `${year}${month}${day}`;
@@ -22,31 +22,28 @@ const getDaysOfWeek = (date: Date) => {
 };
 
 const getNextWeekDays = (date: Date): any => {
-  let res: { [key: string]: string } = {};
+  const res: { [key: string]: string } = {};
   res[getDaysOfWeek(date)] = formatDateYYYYMMDD(date);
 
   // Calculate next 6 days
   // Exclude Sunday
   for (let i = 1; i <= 7; i++) {
     date.setDate(date.getDate() + 1);
-    if (date.getDay() === 0) {
-      continue;
-    } else {
+    if (date.getDay() !== 0) {
       res[getDaysOfWeek(date)] = formatDateYYYYMMDD(date);
     }
   }
 
   // Sort res by key according to daysOfWeek
-  let sortedRes = Object.keys(res).map((k) => ({ key: k, value: res[k] }));
+  const sortedRes = Object.keys(res).map((k) => ({ key: k, value: res[k] }));
   sortedRes.sort((a, b) => {
     if (daysOfWeek.indexOf(a.key) < daysOfWeek.indexOf(b.key)) {
       return -1;
-    } else {
-      return 1;
     }
+    return 1;
   });
 
-  let sortedObj = sortedRes.reduce((obj: any, item: any) => {
+  const sortedObj = sortedRes.reduce((obj: any, item: any) => {
     obj[item.key] = item.value;
     return obj;
   }, {});
@@ -70,29 +67,32 @@ const getModuleFromDate = (dateData: Date, dateSelectorValues: any) => {
     date <= dateSelectorValues["beginSpringB"].getTime()
   ) {
     return "springAHolidays";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginSpringB"].getTime() &&
     date <= dateSelectorValues["beginSpringC"].getTime()
   ) {
     return "springBHolidays";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginSpringC"].getTime() &&
     date <= dateSelectorValues["beginFallA"].getTime()
   ) {
     return "springCHolidays";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginFallA"].getTime() &&
     date <= dateSelectorValues["beginFallB"].getTime()
   ) {
     return "fallAHolidays";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginFallB"].getTime() &&
     date <= dateSelectorValues["beginFallC"].getTime()
   ) {
     return "fallBholidays";
-  } else {
-    return "fallCHolidays";
   }
+  return "fallCHolidays";
 };
 
 const getModuleNameFromDate = (dateData: Date, dateSelectorValues: any) => {
@@ -103,69 +103,71 @@ const getModuleNameFromDate = (dateData: Date, dateSelectorValues: any) => {
     date <= dateSelectorValues["beginSpringB"].getTime()
   ) {
     return "春A";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginSpringB"].getTime() &&
     date <= dateSelectorValues["beginSpringC"].getTime()
   ) {
     return "春B";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginSpringC"].getTime() &&
     date <= dateSelectorValues["beginFallA"].getTime()
   ) {
     return "春C";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginFallA"].getTime() &&
     date <= dateSelectorValues["beginFallB"].getTime()
   ) {
     return "秋A";
-  } else if (
+  }
+  if (
     date >= dateSelectorValues["beginFallB"].getTime() &&
     date <= dateSelectorValues["beginFallC"].getTime()
   ) {
     return "秋B";
-  } else {
-    return "秋C";
   }
+
+  return "秋C";
 };
 
 const createHolidayData = (datestring: string, nendo: number) => {
   const plusYearList = ["01", "02", "03"];
   if (plusYearList.includes(datestring.slice(0, 2))) {
     return `${nendo + 1}-${datestring.slice(0, 2)}-${datestring.slice(2, 4)}`;
-  } else {
-    return `${nendo}-${datestring.slice(0, 2)}-${datestring.slice(2, 4)}`;
   }
+  return `${nendo}-${datestring.slice(0, 2)}-${datestring.slice(2, 4)}`;
 };
 
 const createDeadlinesData = (datestring: string, nendo: number) => {
   const plusYearList = ["01", "02", "03"];
   if (plusYearList.includes(datestring.slice(0, 2))) {
     return `${nendo + 1}${datestring.slice(0, 2)}${datestring.slice(2, 4)}`;
-  } else {
-    return `${nendo}${datestring.slice(0, 2)}${datestring.slice(2, 4)}`;
   }
+  return `${nendo}${datestring.slice(0, 2)}${datestring.slice(2, 4)}`;
 };
 
 const createJSON = (
   SelectorValues: any,
-  holidayValues: string[],
+  holidayValuesSource: string[],
   rescheduleSelectorValues: any,
-  deadlineValues: string[],
-  nendo: number
+  deadlineValuesSource: string[],
+  nendo: number,
 ) => {
   const dateSelectorValues = SelectorValues;
 
-  let res: any = {};
-  holidayValues = holidayValues.map((v) => {
+  const res: any = {};
+  const holidayValues = holidayValuesSource.map((v) => {
     return createHolidayData(v, nendo);
   });
 
-  deadlineValues = deadlineValues.map((v) => {
+  const deadlineValues = deadlineValuesSource.map((v) => {
     return createDeadlinesData(v, nendo);
   });
 
   // Parse holidays
-  let holidayDateList = holidayValues.map((v) => new Date(v));
+  const holidayDateList = holidayValues.map((v) => new Date(v));
   res["springAHolidays"] = [];
   res["springBHolidays"] = [];
   res["springCHolidays"] = [];
@@ -175,17 +177,15 @@ const createJSON = (
 
   for (let i = 0; i < holidayDateList.length; i++) {
     res[getModuleFromDate(holidayDateList[i], dateSelectorValues)].push(
-      holidayValues[i].replaceAll("-", "")
+      holidayValues[i].replaceAll("-", ""),
     );
   }
 
   // Parse start/end dates
-  for (let key in dateSelectorValues) {
+  for (const key in dateSelectorValues) {
     if (key.startsWith("begin")) {
       res[key] = getNextWeekDays(dateSelectorValues[key]);
-    } else if (key.length === 3) {
-      continue;
-    } else {
+    } else if (key.length !== 3) {
       res[key] = formatDate(dateSelectorValues[key]);
     }
   }
@@ -205,8 +205,8 @@ const createJSON = (
   res["fallEndDate"] = fallEndDate;
 
   // Parse rescheduled classes
-  let rescheduledDateList = [];
-  let rescheduledClassList = [];
+  const rescheduledDateList = [];
+  const rescheduledClassList = [];
   let replaceDate;
   let replaceDay;
   let moduleName;
